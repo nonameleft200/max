@@ -42,4 +42,7 @@ Manuell starten: Actions → Auftragsradar → Run workflow.
 - Der Bund-Export kennt bei den meisten unterschwelligen Vergaben keinen Auftragswert.
 - Der NRW-Marktplatz liefert in der Liste nur Titel, Auftraggeber und Fristen. CPV kommt aus dem Suchlauf,
   Details werden nur für gute Treffer nachgeladen. Bitte sparsam abfragen.
+- Der Bekanntmachungsservice des Bundes spiegelt den Vergabemarktplatz NRW bereits vollständig (Stichprobe 28.09.2026:
+  alle 24 NRW-IT-Ausschreibungen der letzten 14 Tage waren auch im Bund-Export). Doppelte werden zugunsten des Bund-Eintrags
+  verworfen. Die NRW-Quelle liefert daher vor allem die Ex-post-Zuschläge für das Behördenradar.
 - Weitere Landesportale (Bayern, BW, Hessen) sind noch nicht angebunden.
