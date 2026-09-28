@@ -1,0 +1,36 @@
+# Profil für den Auftragsradar. Alles hier ist frei anpassbar.
+
+[unternehmen]
+name = "Max (Einzelunternehmer)"
+bundesland = "NRW"          # bevorzugte Region, NUTS-Präfix siehe [regionen]
+gruendungsjahr = 2024       # relevant für den Startup-Direktauftrag bis 100.000 €
+umsatz_letztes_jahr = 60000 # netto, grob; Vergaben mit Mindestumsatz > 2x davon werden abgewertet
+
+[suche]
+tage_zurueck = 14           # wie viele Tage Bekanntmachungen rückwirkend geladen werden
+radar_tage = 90             # Zeitfenster für Zuschläge im Behördenradar (NRW-Marktplatz)
+cpv_prefixe = ["72", "48"]                  # IT-Dienste, Software: klarer IT-Bezug (+12)
+cpv_nah = ["73", "794", "795", "80", "71", "75", "92"] # F&E, Beratung, Schulung u. a.: nur IT-nah (+4), braucht Stichworte
+# NRW-Marktplatz: exakte CPV-Codes für die Suche (die API filtert nur auf Codes, nicht auf Präfixe)
+nrw_cpv_codes = ["72000000-5", "48000000-8", "79000000-4", "73000000-2", "79400000-8", "72200000-7", "72300000-8", "72500000-0", "72600000-6", "80500000-9"]
+# Volltextsuche des Marktplatzes ist unscharf, daher nur längere, eindeutige Begriffe
+nrw_suchbegriffe = ["Künstliche Intelligenz", "Digitalisierung", "Chatbot", "Automatisierung", "Datenanalyse", "Webanwendung", "Softwareentwicklung", "Dokumentenmanagement"]
+mindest_score = 40          # ab diesem Score landet ein Treffer im Report
+max_wert = 216000           # EU-Schwelle für Länder/Kommunen; darüber wird stark abgewertet
+
+[schluesselwoerter]
+# Treffer zählen als ganzes Wort, Groß-/Kleinschreibung egal. Ein "*" am Ende erlaubt Fortsetzungen (Digitalisierung* trifft auch Digitalisierungsstrategie).
+# Titeltreffer zählen doppelt. stark = KI-spezifisch, mittel = IT-/Digital-spezifisch, schwach = generisch (nur kleiner Bonus).
+stark = ["KI", "KI-*", "Künstliche* Intelligenz", "Artificial Intelligence", "LLM", "LLM-*", "Sprachmodell*", "Chatbot*", "Machine Learning", "Maschinelles Lernen", "Deep Learning", "Generative*", "GenAI", "Copilot", "RAG", "KI-Agent*", "Agentic", "Large Language", "NLP", "Computer Vision"]
+mittel = ["Digitalisierung*", "Automatisierung*", "Prozessautomatisierung", "RPA", "Datenanalyse*", "Data Science", "Data Analytics", "Prototyp*", "Proof of Concept", "PoC", "Webanwendung*", "Web-Anwendung*", "Webapplikation*", "App", "Apps", "App-*", "Softwareentwicklung", "Software-Entwicklung", "Individualsoftware", "Schnittstelle*", "API", "Python", "Dashboard*", "OZG", "E-Government", "Verwaltungsdigitalisierung", "Dokumentenmanagement*", "DMS", "Wissensmanagement*", "Workflow*", "Low-Code", "No-Code", "Fachverfahren", "Datenplattform", "Data Warehouse", "Business Intelligence", "Chatbots", "Digitale* Transformation", "IT-Beratung", "IT-Konzept*", "Anforderungsanalyse", "Softwarearchitektur", "E-Akte", "Fachanwendung*", "Webportal*", "Online-Portal*", "Prozessanalyse", "Prozessoptimierung", "KI-gestützt*", "Datengetrieben*"]
+schwach = ["Software", "IT", "IT-*", "Daten", "Datenbank*", "Cloud", "Machbarkeitsstudie", "Entwicklung", "Weiterentwicklung", "Beratung*", "Konzept*", "Konzeption", "Studie", "Workshop*", "Schulung*", "Portal", "Plattform", "digital*", "Webseite", "Website", "Web"]
+
+[ausschluss]
+# Harte Ausschlüsse: Treffer wird verworfen
+hart = ["ISO 27001", "ISO/IEC 27001", "BSI C5", "C5-Testat", "ISO 9001", "ISO 20000", "24/7", "Rechenzentrum", "Managed Security", "Security Operations Center", "SOC-", "Hardware", "Lieferung von", "Lizenzen", "Lizenzverlängerung", "Lizenzwartung", "Enterprise Agreement", "Druck- und Kopier", "Telekommunikationsanlage", "Netzwerkkomponenten", "Server", "Storage", "NetApp", "Firewall", "Endgeräte", "Notebooks", "Tablets", "Kabel", "Glasfaser", "Breitband", "Fahrzeug*", "Scan*", "Scandienstleistung*", "Mikroverfilmung", "Stellenausschreibung", "Werkstudent*", "Catering", "Postdienst*", "Briefdienst*", "Paketdienst*", "Übersetzung*", "Messestand*", "Reinigung*", "Bewachung", "Winterdienst", "Druckerzeugnis*", "Drucksachen", "Möbel", "Medizintechnik", "Labor*", "Grafikkarte*", "GPU*", "Notebook*", "Workstation*", "Rechner", "Cluster", "Hochleistungs*", "Drucker", "Monitore", "Beamer", "Mobilfunk*", "Telefonanlage*", "Lernplattform-Lizenz*", "Subscription", "Wartungsvertrag*", "Softwarepflege*", "Ölspur*", "Fahrgestell", "Abfall*", "Baustelle*", "Multifunktionsgerät*", "Kopierer", "Data Domain", "Maintenance", "Zahntechnik", "Fotobestand*"]
+# Weiche Ausschlüsse: nur Abzug
+weich = ["Rahmenvereinbarung", "Rahmenvertrag", "Hosting", "Betrieb", "Managed Service", "SAP", "Microsoft 365", "M365", "Wartung und Pflege", "Mindestumsatz", "Mindestjahresumsatz", "Mitarbeiterzahl", "Vor-Ort-Präsenz", "Bereitschaft", "Personalgestellung", "Arbeitnehmerüberlassung", "Bau*", "Planungsleistung*", "Ingenieur*", "Architekt*", "Versicherung*", "Agentur*", "Kampagne*", "Redaktion*", "Evaluation", "Gutachten", "Verlängerung", "Support", "Testat", "Archiv*", "Quartiersmanagement", "Stadtteil*", "Klimaschutz*", "Tourismus*"]
+
+[regionen]
+# NUTS-1-Präfixe → Bonus. NRW = DEA. Bund-Auftraggeber sitzen oft in Bonn (DEA22) oder Berlin (DE30).
+bonus = { "DEA" = 15, "DE3" = 5 }

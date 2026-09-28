@@ -1,0 +1,32 @@
+name: Auftragsradar
+
+on:
+  schedule:
+    - cron: "17 5 * * 1-5"   # werktags 07:17 MESZ / 06:17 MEZ
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  radar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/cache@v4
+        with:
+          path: data
+          key: radar-data-${{ github.run_id }}
+          restore-keys: radar-data-
+      - run: pip install -r requirements.txt
+      - run: python -m auftragsradar -v
+      - name: Report einchecken
+        run: |
+          git config user.name "auftragsradar"
+          git config user.email "auftragsradar@users.noreply.github.com"
+          git add reports
+          git diff --cached --quiet || git commit -m "Report $(date -u +%F)"
+          git push
